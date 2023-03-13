@@ -1,4 +1,4 @@
-***News***
+**_News_**
 
 - We re-implement CycleGAN by **Tensorflow 2**! The old versions are here: [v1](https://github.com/LynnHo/CycleGAN-Tensorflow-PyTorch/tree/v1), [v0](https://github.com/LynnHo/CycleGAN-Tensorflow-PyTorch/tree/v0).
 
@@ -14,7 +14,7 @@ Tensorflow 2 implementation of CycleGAN.
 
 Paper: [Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks](https://arxiv.org/pdf/1703.10593.pdf)
 
-Author: [Jun-Yan Zhu ](https://people.eecs.berkeley.edu/~junyanz/) *et al.*
+Author: [Jun-Yan Zhu ](https://people.eecs.berkeley.edu/~junyanz/) _et al._
 
 ## Exemplar results
 
@@ -40,62 +40,58 @@ row 1: apple -> orange -> reconstructed apple, row 2: orange -> apple -> reconst
 
 - Environment
 
-    - Python 3.6
+  - Python 3.6
 
-    - TensorFlow 2.2, TensorFlow Addons 0.10.0
+  - TensorFlow 2.6, TensorFlow Addons
 
-    - OpenCV, scikit-image, tqdm, oyaml
+  - OpenCV, scikit-image, tqdm, oyaml
 
-    - *we recommend [Anaconda](https://www.anaconda.com/distribution/#download-section) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html#linux-installers), then you can create the TensorFlow 2.2 environment with commands below*
+  - _we recommend [Anaconda](https://www.anaconda.com/distribution/#download-section) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html#linux-installers), then you can create the TensorFlow 2.2 environment with commands below_
 
-        ```console
-        conda create -n tensorflow-2.2 python=3.6
+    ```console
+    conda create -n tensorflow-2.6 python=3.6
 
-        source activate tensorflow-2.2
+    conda activate tensorflow-2.6
 
-        conda install scikit-image tqdm tensorflow-gpu=2.2
+    pip install -r requirements.txt --ignore-installed certifi
+    ```
 
-        conda install -c conda-forge oyaml
+  - _NOTICE: if you create a new conda environment, remember to activate it before any other command_
 
-        pip install tensorflow-addons==0.10.0
-        ```
-
-    - *NOTICE: if you create a new conda environment, remember to activate it before any other command*
-
-        ```console
-        source activate tensorflow-2.2
-        ```
+    ```console
+    source activate tensorflow-2.2
+    ```
 
 - Dataset
 
-    - download the summer2winter dataset
+  - download the summer2winter dataset
 
-        ```console
-        sh ./download_dataset.sh summer2winter_yosemite
-        ```
+    ```console
+    sh ./download_dataset.sh summer2winter_yosemite
+    ```
 
-    - download the horse2zebra dataset
+  - download the horse2zebra dataset
 
-        ```console
-        sh ./download_dataset.sh horse2zebra
-        ```
+    ```console
+    sh ./download_dataset.sh horse2zebra
+    ```
 
-    - see [download_dataset.sh](./download_dataset.sh) for more datasets
+  - see [download_dataset.sh](./download_dataset.sh) for more datasets
 
 - Example of training
 
+  ```console
+  CUDA_VISIBLE_DEVICES=0 python train.py --dataset summer2winter_yosemite
+  ```
+
+  - tensorboard for loss visualization
+
     ```console
-    CUDA_VISIBLE_DEVICES=0 python train.py --dataset summer2winter_yosemite
+    tensorboard --logdir ./output/summer2winter_yosemite/summaries --port 6006
     ```
-
-    - tensorboard for loss visualization
-
-        ```console
-        tensorboard --logdir ./output/summer2winter_yosemite/summaries --port 6006
-        ```
 
 - Example of testing
 
-    ```console
-    CUDA_VISIBLE_DEVICES=0 python test.py --experiment_dir ./output/summer2winter_yosemite
-    ```
+  ```console
+  CUDA_VISIBLE_DEVICES=0 python test.py --experiment_dir ./output/summer2winter_yosemite
+  ```
