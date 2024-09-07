@@ -40,26 +40,26 @@ row 1: apple -> orange -> reconstructed apple, row 2: orange -> apple -> reconst
 
 - Environment
 
-  - Python 3.6
+  - Python 3.10
 
-  - TensorFlow 2.6, TensorFlow Addons
+  - TensorFlow 2.15
 
   - OpenCV, scikit-image, tqdm, oyaml
 
   - _we recommend [Anaconda](https://www.anaconda.com/distribution/#download-section) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html#linux-installers), then you can create the TensorFlow 2.2 environment with commands below_
 
     ```console
-    conda create -n tensorflow-2.6 python=3.6
+    conda create -n cyclegan python=3.10
 
-    conda activate tensorflow-2.6
+    conda activate cyclegan
 
-    pip install -r requirements.txt --ignore-installed certifi
+    pip install -r requirements.txt
     ```
 
   - _NOTICE: if you create a new conda environment, remember to activate it before any other command_
 
     ```console
-    source activate tensorflow-2.2
+    source activate cyclegan
     ```
 
 - Dataset

@@ -119,11 +119,12 @@ class LinearDecay(keras.optimizers.schedules.LearningRateSchedule):
     def __init__(self, initial_learning_rate, total_steps, step_decay):
         super(LinearDecay, self).__init__()
         self._initial_learning_rate = initial_learning_rate
-        self._steps = total_steps
-        self._step_decay = step_decay
+        self._steps = tf.cast(total_steps, tf.float32)
+        self._step_decay = tf.cast(step_decay, tf.float32)
         self.current_learning_rate = tf.Variable(initial_value=initial_learning_rate, trainable=False, dtype=tf.float32)
 
     def __call__(self, step):
+        step = tf.cast(step, tf.float32)
         self.current_learning_rate.assign(tf.cond(
             step >= self._step_decay,
             true_fn=lambda: self._initial_learning_rate * (1 - 1 / (self._steps - self._step_decay) * (step - self._step_decay)),

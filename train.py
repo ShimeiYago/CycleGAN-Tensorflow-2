@@ -74,8 +74,8 @@ identity_loss_fn = tf.losses.MeanAbsoluteError()
 
 G_lr_scheduler = module.LinearDecay(args.lr, args.epochs * len_dataset, args.epoch_decay * len_dataset)
 D_lr_scheduler = module.LinearDecay(args.lr, args.epochs * len_dataset, args.epoch_decay * len_dataset)
-G_optimizer = keras.optimizers.Adam(learning_rate=G_lr_scheduler, beta_1=args.beta_1)
-D_optimizer = keras.optimizers.Adam(learning_rate=D_lr_scheduler, beta_1=args.beta_1)
+G_optimizer = keras.optimizers.legacy.Adam(learning_rate=G_lr_scheduler, beta_1=args.beta_1)
+D_optimizer = keras.optimizers.legacy.Adam(learning_rate=D_lr_scheduler, beta_1=args.beta_1)
 
 
 # ==============================================================================
@@ -213,6 +213,8 @@ with train_summary_writer.as_default():
                 A, B = next(test_iter)
                 A2B, B2A, A2B2A, B2A2B = sample(A, B)
                 img = im.immerge(np.concatenate([A, A2B, A2B2A, B, B2A, B2A2B], axis=0), n_rows=2)
+                if np.min(img) < -1.0 or np.max(img) > 1.0:
+                    img = (img - np.min(img)) / (np.max(img) - np.min(img)) * 2 - 1
                 im.imwrite(img, py.join(sample_dir, 'iter-%09d.jpg' % G_optimizer.iterations.numpy()))
 
         # save checkpoint
