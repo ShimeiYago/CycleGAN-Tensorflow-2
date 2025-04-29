@@ -56,6 +56,11 @@ row 1: apple -> orange -> reconstructed apple, row 2: orange -> apple -> reconst
     pip install -r requirements.txt
     ```
 
+  - (For Mac OS) To enable GPU acceleration on Apple Silicon Macs, install the following package:
+    ```
+    pip install tensorflow-metal
+    ```
+
   - _NOTICE: if you create a new conda environment, remember to activate it before any other command_
 
     ```console
